@@ -15,10 +15,10 @@ pip install eon4dice
 Import and call the 'roll' function with the desired roll as a string:
 
 ```Python
-from eon4dice import roll
+from eon4dice import dice
 
-result = roll('4T6+2')
-result2 = roll('1t100')
+result = dice.roll('4T6+2')
+result2 = dice.roll('1t100')
 ```
 
 D6's will always explode. No other dice (such as D10 or D100) will explode. Bonus is optional. Minus (-) can not
