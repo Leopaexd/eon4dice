@@ -1,2 +1,4 @@
 /tests/.pytest_cache/
 /.idea/
+/dist/
+/src/eon4dice.egg-info/
