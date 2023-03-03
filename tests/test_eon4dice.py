@@ -1,5 +1,5 @@
 from unittest import TestCase
-from eon4dice.src.eon4dice import eon4dice
+from src.eon4dice import eon4dice
 
 
 class Test(TestCase):
