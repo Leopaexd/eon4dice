@@ -1,26 +1,44 @@
 from random import randint
 
 
-def roll(dicestring):
-    """Rolls dice according to input string and returns the sum.
+def roll(number_of_dice, sides=6, bonus=0, verbose=False):
+    """Rolls the specified number of dice and returns sum plus bonus (if any). 6-sided dice will explode.
 
-    Bonus is optional, if used, it should be positive (or zero). Not case-sensitive.
+    If input is provided as a dicestring such as "5T6+2" or "1T100", it will call the decode_dicestring
+    function to interpet it.
+    @param number_of_dice: how many dice to roll, can also be a dicestring such as "4T6+2"
+    @param sides: number of sides per dice, intended for D10's and D100's.
+    @param bonus: number to modify the result.
+    @param verbose: prints the number of dice, sides and bonus. Intended for debug use.
+    """
+    if not str(number_of_dice).isdigit():  # checks if a dicestring expression was provided
+        number_of_dice, sides, bonus = decode_dicestring(number_of_dice)
 
-    :param dicestring: should look like "5T6+2", "1T100" or "2t6".
+    if verbose:
+        print('Rolling ' + str(number_of_dice) + 'T' + str(sides) + '+' + str(bonus))
+
+    if sides == 6:
+        result = d6(number_of_dice)
+    else:
+        result = other_dice(number_of_dice, sides)
+
+    return result + bonus
+
+
+def decode_dicestring(dicestring):
+    """Decodes a dicestring (such as "2T6+2) and returns number of dice, sides and bonus.
+
+    :param dicestring: should look like "5T6+2", "1T100" or "2t6". Bonus is optional.
     """
     if '+' in dicestring:
         dicestring, bonus = dicestring.split('+')
         bonus = int(bonus)
     else:
         bonus = 0
+    number_of_dice, sides = [int(x) for x in dicestring.lower().split('t')]
+    return number_of_dice, sides, bonus
 
-    number_of_dice, dice_sides = [int(x) for x in dicestring.lower().split('t')]
-    if dice_sides == 6:
-        result = d6(number_of_dice)
-    else:
-        result = other_dice(number_of_dice, dice_sides)
 
-    return result + bonus
 
 
 def d6(number_of_dice):
