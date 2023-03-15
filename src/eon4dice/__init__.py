@@ -1,1 +1,3 @@
-__all__ = ['dice']
+__all__ = ['dice', 'roll']
+
+from .dice import roll
