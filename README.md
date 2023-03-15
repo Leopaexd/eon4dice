@@ -12,14 +12,20 @@ pip install eon4dice
 ```
 
 ### How to use
-Import and call the 'roll' function with the desired roll as a string:
+Import and call the 'roll' function. It expects input as arguments (number_of_dice, sides=6, bonus=0) or a string. Note
+that the 'sides' and 'bonus' arguments are optional.  For debugging purposes, you can also set verbose=True to allow 
+you to see the rolls being made.
+
+Examples:
 
 ```Python
-from eon4dice import dice
+from eon4dice import roll
 
-result = dice.roll('4T6+2')
-result2 = dice.roll('1t100')
+result = roll(1,100) # rolls 1T100
+result = roll(3, bonus=3)  # rolls 3T6+3
+result = roll(2) # rolls 2T6+0
+result = roll('4T6+2')
+result = roll('1t100', verbose=True)
 ```
 
-D6's will always explode. No other dice (such as D10 or D100) will explode. Bonus is optional. Minus (-) can not
-be used instead of plus (+)
+D6's will always explode. No other dice (such as D10 or D100) will explode. 
